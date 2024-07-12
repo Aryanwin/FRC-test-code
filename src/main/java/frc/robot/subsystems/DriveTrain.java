@@ -35,7 +35,13 @@ public class DriveTrain extends SubsystemBase {
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {}
-
+  
+  private final WPI_TalonFX[] motors = new WPI_TalonFX[] {
+    new WPI_TalonFX(LEFT_FRONT_MOTOR_PORT),
+    new WPI_TalonFX(LEFT_BACK_MOTOR_PORT),
+    new WPI_TalonFX(RIGHT_FRONT_MOTOR_PORT),
+    new WPI_TalonFX(RIGHT_BACK_MOTOR_PORT)
+  };
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
