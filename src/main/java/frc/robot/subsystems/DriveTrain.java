@@ -20,6 +20,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -27,13 +28,10 @@ import edu.wpi.first.math.geometry.Translation2d;
 import static frc.robot.utility.Constants.Unit.*;
 
 public class DriveTrain extends SubsystemBase {
-  Spark leftFront;
-  Spark rightFront;
-  Spark leftBack;
-  Spark rightBack;
-  PWMMotorController leftMotors;
-  PWMMotorController rightMotors;
-  DifferentialDrive drive;
+  private static final int LEFT_FRONT_MOTOR_PORT = 40;
+  private static final int LEFT_BACK_MOTOR_PORT = 43;
+  private static final int RIGHT_FRONT_MOTOR_PORT = 41;
+  private static final int RIGHT_BACK_MOTOR_PORT = 42;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {}
