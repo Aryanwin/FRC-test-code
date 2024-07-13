@@ -16,6 +16,8 @@ import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderStatusFrame;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.drive.*; 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -25,7 +27,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
-import static frc.robot.utility.Constants.Unit.*;
+/**import static frc.robot.utility.Constants.Unit.*; */
 
 public class DriveTrain extends SubsystemBase {
   private static final int LEFT_FRONT_MOTOR_PORT = 40;
@@ -42,6 +44,15 @@ public class DriveTrain extends SubsystemBase {
     new WPI_TalonFX(RIGHT_FRONT_MOTOR_PORT),
     new WPI_TalonFX(RIGHT_BACK_MOTOR_PORT)
   };
+  WPI_TalonFX lf = new WPI_TalonFX(LEFT_FRONT_MOTOR_PORT);
+  
+
+  private final CANCoder[] encoders = new CANCoder[] {
+    new CANCoder(LEFT_FRONT_ENCODER_ROTATOR_PORT),
+    new CANCoder(LEFT_BACK_ENCODER_ROTATOR_PORT),
+    new CANCoder(RIGHT_FRONT_ENCODER_ROTATOR_PORT),
+    new CANCoder(RIGHT_BACK_ENCODER_ROTATOR_PORT)
+};
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
