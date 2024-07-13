@@ -9,12 +9,8 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.CANCoder;
-import com.ctre.phoenix.sensors.CANCoderStatusFrame;
-import com.ctre.phoenix.sensors.SensorInitializationStrategy;
+import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.drive.*; 
@@ -35,23 +31,27 @@ public class DriveTrain extends SubsystemBase {
   private static final int RIGHT_FRONT_MOTOR_PORT = 41;
   private static final int RIGHT_BACK_MOTOR_PORT = 42;
 
+  private static final int LEFT_FRONT_MOTOR_ROTATOR_PORT = 30;
+  private static final int LEFT_BACK_MOTOR_ROTATOR_PORT = 33;
+  private static final int RIGHT_FRONT_MOTOR_ROTATOR_PORT = 31;
+  private static final int RIGHT_BACK_MOTOR_ROTATOR_PORT = 32;
+
   /** Creates a new DriveTrain. */
   public DriveTrain() {}
   
-  private final WPI_TalonFX[] motors = new WPI_TalonFX[] {
-    new WPI_TalonFX(LEFT_FRONT_MOTOR_PORT),
-    new WPI_TalonFX(LEFT_BACK_MOTOR_PORT),
-    new WPI_TalonFX(RIGHT_FRONT_MOTOR_PORT),
-    new WPI_TalonFX(RIGHT_BACK_MOTOR_PORT)
+  private final TalonFX[] motors = new TalonFX[] {
+    new TalonFX(LEFT_FRONT_MOTOR_PORT),
+    new TalonFX(LEFT_BACK_MOTOR_PORT),
+    new TalonFX(RIGHT_FRONT_MOTOR_PORT),
+    new TalonFX(RIGHT_BACK_MOTOR_PORT)
   };
-  WPI_TalonFX lf = new WPI_TalonFX(LEFT_FRONT_MOTOR_PORT);
   
 
-  private final CANCoder[] encoders = new CANCoder[] {
-    new CANCoder(LEFT_FRONT_ENCODER_ROTATOR_PORT),
-    new CANCoder(LEFT_BACK_ENCODER_ROTATOR_PORT),
-    new CANCoder(RIGHT_FRONT_ENCODER_ROTATOR_PORT),
-    new CANCoder(RIGHT_BACK_ENCODER_ROTATOR_PORT)
+  private final CANcoder[] encoders = new CANcoder[] {
+    new CANcoder(LEFT_FRONT_ENCODER_ROTATOR_PORT),
+    new CANcoder(LEFT_BACK_ENCODER_ROTATOR_PORT),
+    new CANcoder(RIGHT_FRONT_ENCODER_ROTATOR_PORT),
+    new CANcoder(RIGHT_BACK_ENCODER_ROTATOR_PORT)
 };
   @Override
   public void periodic() {
