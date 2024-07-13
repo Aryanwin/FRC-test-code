@@ -19,6 +19,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -26,15 +27,15 @@ import edu.wpi.first.math.geometry.Translation2d;
 /**import static frc.robot.utility.Constants.Unit.*; */
 
 public class DriveTrain extends SubsystemBase {
-  private static final int LEFT_FRONT_MOTOR_PORT = 40;
-  private static final int LEFT_BACK_MOTOR_PORT = 43;
-  private static final int RIGHT_FRONT_MOTOR_PORT = 41;
-  private static final int RIGHT_BACK_MOTOR_PORT = 42;
+  private static final int LEFT_FRONT_MOTOR_PORT = Constants.LEFT_FRONT_MOTOR_PORT;
+  private static final int LEFT_BACK_MOTOR_PORT = Constants.LEFT_BACK_MOTOR_PORT;
+  private static final int RIGHT_FRONT_MOTOR_PORT = Constants.RIGHT_BACK_MOTOR_PORT;
+  private static final int RIGHT_BACK_MOTOR_PORT = Constants.RIGHT_BACK_MOTOR_PORT;
 
-  private static final int LEFT_FRONT_ENCODER_ROTATOR_PORT = 50;
-    private static final int LEFT_BACK_ENCODER_ROTATOR_PORT = 53;
-    private static final int RIGHT_FRONT_ENCODER_ROTATOR_PORT = 51;
-    private static final int RIGHT_BACK_ENCODER_ROTATOR_PORT = 52;
+  private static final int LEFT_FRONT_ENCODER_ROTATOR_PORT = Constants.LEFT_FRONT_ENCODER_ROTATOR_PORT;
+  private static final int LEFT_BACK_ENCODER_ROTATOR_PORT = Constants.LEFT_BACK_ENCODER_ROTATOR_PORT;
+  private static final int RIGHT_FRONT_ENCODER_ROTATOR_PORT = Constants.RIGHT_FRONT_ENCODER_ROTATOR_PORT;
+  private static final int RIGHT_BACK_ENCODER_ROTATOR_PORT = Constants.RIGHT_BACK_ENCODER_ROTATOR_PORT;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {}
@@ -56,5 +57,12 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public void set(double spd) {
+    motors[0].set(spd);
+    motors[1].set(spd);
+    motors[2].set(spd);
+    motors[3].set(spd);
   }
 }
