@@ -53,7 +53,10 @@ public class DriveTrain extends SubsystemBase {
     new CANcoder(LEFT_BACK_ENCODER_ROTATOR_PORT),
     new CANcoder(RIGHT_FRONT_ENCODER_ROTATOR_PORT),
     new CANcoder(RIGHT_BACK_ENCODER_ROTATOR_PORT)
-};
+  };
+
+  leftMotors = new SpeedControllerGroup
+  drive = new DifferentialDrive()
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -64,5 +67,9 @@ public class DriveTrain extends SubsystemBase {
     motors[1].set(spd);
     motors[2].set(spd);
     motors[3].set(spd);
+  }
+
+  public void driveWithJoysticks(XboxController controller, double speed){
+    drive.arcadeDrive(controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS)*speed, controller.getRawAxis(Constants.XBOX_Left_X_Axis)*speed);
   }
 }
