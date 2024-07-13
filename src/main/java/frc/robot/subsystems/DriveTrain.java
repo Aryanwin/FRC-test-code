@@ -31,10 +31,10 @@ public class DriveTrain extends SubsystemBase {
   private static final int RIGHT_FRONT_MOTOR_PORT = 41;
   private static final int RIGHT_BACK_MOTOR_PORT = 42;
 
-  private static final int LEFT_FRONT_MOTOR_ROTATOR_PORT = 30;
-  private static final int LEFT_BACK_MOTOR_ROTATOR_PORT = 33;
-  private static final int RIGHT_FRONT_MOTOR_ROTATOR_PORT = 31;
-  private static final int RIGHT_BACK_MOTOR_ROTATOR_PORT = 32;
+  private static final int LEFT_FRONT_ENCODER_ROTATOR_PORT = 50;
+    private static final int LEFT_BACK_ENCODER_ROTATOR_PORT = 53;
+    private static final int RIGHT_FRONT_ENCODER_ROTATOR_PORT = 51;
+    private static final int RIGHT_BACK_ENCODER_ROTATOR_PORT = 52;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {}
