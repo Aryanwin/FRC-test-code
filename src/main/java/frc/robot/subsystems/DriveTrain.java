@@ -13,7 +13,7 @@ import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.drive.*; 
+import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -55,8 +55,8 @@ public class DriveTrain extends SubsystemBase {
     new CANcoder(RIGHT_BACK_ENCODER_ROTATOR_PORT)
   };
 
-  leftMotors = new SpeedControllerGroup
-  drive = new DifferentialDrive()
+  DifferentialDrive drive = new DifferentialDrive(motors[0], motors[2]);
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -67,6 +67,20 @@ public class DriveTrain extends SubsystemBase {
     motors[1].set(spd);
     motors[2].set(spd);
     motors[3].set(spd);
+  }
+
+  public void motorsinit(){
+    motors[0].configFactoryDefault();
+    motors[1].configFactoryDefault();
+    motors[2].configFactoryDefault();
+    motors[3].configFactoryDefault();
+
+    motors[1].follow(motors[0]);
+    motors[3].follow(motors[2]);
+  }
+
+  public double getMotorPosition(int motornum){
+    return motors[motornum].getSelectedSensorPosition(0);
   }
 
   public void driveWithJoysticks(XboxController controller, double speed){
