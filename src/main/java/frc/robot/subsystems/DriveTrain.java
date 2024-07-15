@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -40,9 +41,6 @@ public class DriveTrain extends SubsystemBase {
   private static final int RIGHT_FRONT_ENCODER_ROTATOR_PORT = Constants.RIGHT_FRONT_ENCODER_ROTATOR_PORT;
   private static final int RIGHT_BACK_ENCODER_ROTATOR_PORT = Constants.RIGHT_BACK_ENCODER_ROTATOR_PORT;
 
-  /** Creates a new DriveTrain. */
-  public DriveTrain() {}
-  
   private final static TalonFX[] motors = new TalonFX[] {
     new TalonFX(LEFT_FRONT_MOTOR_PORT),
     new TalonFX(LEFT_BACK_MOTOR_PORT),
@@ -58,8 +56,14 @@ public class DriveTrain extends SubsystemBase {
     new CANcoder(RIGHT_BACK_ENCODER_ROTATOR_PORT)
   };
 
+  /** Creates a new DriveTrain. */
+  public DriveTrain() {
+    motors[1].setControl(new Follower(motors[0].getDeviceID(), false));
+    motors[3].setControl(new Follower(motors[2].getDeviceID(), false));
+  }
+
   DifferentialDrive drive = new DifferentialDrive(motors[0], motors[2]);
-  GroupMotorControllers
+  //motors[1].follow(motors[0]);
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
