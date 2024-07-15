@@ -27,4 +27,8 @@ public class Constants {
   public static final int LEFT_BACK_ENCODER_ROTATOR_PORT = 53;
   public static final int RIGHT_FRONT_ENCODER_ROTATOR_PORT = 51;
   public static final int RIGHT_BACK_ENCODER_ROTATOR_PORT = 52;
+
+  // make sure to actually check these with drivestation when controller is available
+  public static final int XBOX_LEFT_Y_AXIS = 1;
+  public static final int XBOX_Left_X_Axis = 0;
 }

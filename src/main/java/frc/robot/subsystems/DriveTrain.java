@@ -56,13 +56,13 @@ public class DriveTrain extends SubsystemBase {
     new CANcoder(RIGHT_BACK_ENCODER_ROTATOR_PORT)
   };
 
+  DifferentialDrive drive = new DifferentialDrive(motors[0], motors[2]);
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     motors[1].setControl(new Follower(motors[0].getDeviceID(), false));
     motors[3].setControl(new Follower(motors[2].getDeviceID(), false));
   }
 
-  DifferentialDrive drive = new DifferentialDrive(motors[0], motors[2]);
   //motors[1].follow(motors[0]);
   @Override
   public void periodic() {
@@ -81,7 +81,16 @@ public class DriveTrain extends SubsystemBase {
     return motors[motornum].getSelectedSensorPosition(0);
   }
 
+  //speed is btwn 0 and 1
   public void driveWithJoysticks(XboxController controller, double speed){
     drive.arcadeDrive(controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS)*speed, controller.getRawAxis(Constants.XBOX_Left_X_Axis)*speed);
+  }
+
+  public void driveForward(double speed){
+    drive.tankDrive(speed, speed);
+  }
+
+  public void stop(){
+    drive.stopMotor();
   }
 }
