@@ -6,9 +6,11 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.GroupMotorControllers;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -23,6 +25,7 @@ import frc.robot.Constants;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+
 
 /**import static frc.robot.utility.Constants.Unit.*; */
 
@@ -40,7 +43,7 @@ public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
   public DriveTrain() {}
   
-  private final TalonFX[] motors = new TalonFX[] {
+  private final static TalonFX[] motors = new TalonFX[] {
     new TalonFX(LEFT_FRONT_MOTOR_PORT),
     new TalonFX(LEFT_BACK_MOTOR_PORT),
     new TalonFX(RIGHT_FRONT_MOTOR_PORT),
@@ -56,7 +59,7 @@ public class DriveTrain extends SubsystemBase {
   };
 
   DifferentialDrive drive = new DifferentialDrive(motors[0], motors[2]);
-
+  GroupMotorControllers
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -69,15 +72,6 @@ public class DriveTrain extends SubsystemBase {
     motors[3].set(spd);
   }
 
-  public void motorsinit(){
-    motors[0].configFactoryDefault();
-    motors[1].configFactoryDefault();
-    motors[2].configFactoryDefault();
-    motors[3].configFactoryDefault();
-
-    motors[1].follow(motors[0]);
-    motors[3].follow(motors[2]);
-  }
 
   public double getMotorPosition(int motornum){
     return motors[motornum].getSelectedSensorPosition(0);
